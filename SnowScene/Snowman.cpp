@@ -273,32 +273,32 @@ void Snowman::BuildSnowmanBuffers()
 
 void Snowman::UpdateScene(XMMATRIX base)
 {
-	XMStoreFloat4x4(&mBodySphereWorld, XMMatrixTranslation(0.0f, 0.0f + mBodyScale / 2, 0.0f) * base);
+	XMStoreFloat4x4(&mBodySphereWorld, XMMatrixTranslation(0.0f, mBodyScale / 2, 0.0f) * base);
 
 	FLOAT headHeight = mBodyScale + mHeadScale * 3.0f / 8.0f;
-	XMStoreFloat4x4(&mHeadSphereWorld, XMMatrixTranslation(0.0f, 0.0f + headHeight, 0.0f) * base);
+	XMStoreFloat4x4(&mHeadSphereWorld, XMMatrixTranslation(0.0f, headHeight, 0.0f) * base);
 
 	FLOAT hatEdgeHeight = headHeight + mHeadScale * 3.0f / 8.0f;
-	XMStoreFloat4x4(&mHatEdgeCylinderWorld, XMMatrixTranslation(0.0f, 0.0f + hatEdgeHeight +
+	XMStoreFloat4x4(&mHatEdgeCylinderWorld, XMMatrixTranslation(0.0f, hatEdgeHeight +
 		mHatEdgeHeight, 0.0f) * base);
 
-	XMStoreFloat4x4(&mHatCylinderWorld, XMMatrixTranslation(0.0f, 0.0f + hatEdgeHeight +
+	XMStoreFloat4x4(&mHatCylinderWorld, XMMatrixTranslation(0.0f, hatEdgeHeight +
 		mHatEdgeHeight + mHatHeight / 2, 0.0f) * base);
 
-	XMStoreFloat4x4(&mEyeSphereWorld[0], XMMatrixTranslation(0.0f - mHeadScale / 2 * sinf(XM_PI / 6.0f),
-		0.0f + headHeight + mHeadScale / 2 * sinf(XM_PI / 6.0f), 0.0f - mHeadScale / 2 * cosf(XM_PI / 6.0f)) * base);
-	XMStoreFloat4x4(&mEyeSphereWorld[1], XMMatrixTranslation(0.0f + mHeadScale / 2 * sinf(XM_PI / 6.0f),
-		0.0f + headHeight + mHeadScale / 2 * sinf(XM_PI / 6.0f), 0.0f - mHeadScale / 2 * cosf(XM_PI / 6.0f)) * base);
+	XMStoreFloat4x4(&mEyeSphereWorld[0], XMMatrixTranslation(- mHeadScale / 2 * sinf(XM_PI / 6.0f),
+		headHeight + mHeadScale / 2 * sinf(XM_PI / 6.0f), - mHeadScale / 2 * cosf(XM_PI / 6.0f)) * base);
+	XMStoreFloat4x4(&mEyeSphereWorld[1], XMMatrixTranslation(mHeadScale / 2 * sinf(XM_PI / 6.0f),
+		headHeight + mHeadScale / 2 * sinf(XM_PI / 6.0f), - mHeadScale / 2 * cosf(XM_PI / 6.0f)) * base);
 
 	XMMATRIX noseLocalRotate = XMMatrixRotationX(XM_PI * 1.5f);
-	XMMATRIX noseOffset = XMMatrixTranslation(0.0f, 0.0f + headHeight, 0.0f - mHeadScale / 2 - mNoseHeight / 2);
+	XMMATRIX noseOffset = XMMatrixTranslation(0.0f, headHeight, - mHeadScale / 2 - mNoseHeight / 2);
 	XMStoreFloat4x4(&mNoseCylinderWorld, noseLocalRotate * noseOffset * base);
 
 	XMMATRIX handLocalRotate = XMMatrixRotationZ(XM_PI * 0.75f);
-	XMMATRIX handOffset = XMMatrixTranslation(0.0f + mBodyScale / 2, 0.0f + mBodyScale * 3.0f / 4.0f, 0.0f);
+	XMMATRIX handOffset = XMMatrixTranslation(mBodyScale / 2, mBodyScale * 3.0f / 4.0f, 0.0f);
 	XMStoreFloat4x4(&mHandCylinderWorld, handLocalRotate * handOffset * base);
 
-	XMStoreFloat4x4(&mMouthBoxWorld, XMMatrixTranslation(0.0f, 0.0f + headHeight - mHeadScale / 2 * sinf(XM_PI / 6.0f), 0.0f - mHeadScale / 2 * cosf(XM_PI / 6.0f)) * base);
+	XMStoreFloat4x4(&mMouthBoxWorld, XMMatrixTranslation(0.0f, headHeight - mHeadScale / 2 * sinf(XM_PI / 6.0f), - mHeadScale / 2 * cosf(XM_PI / 6.0f)) * base);
 }
 
 
