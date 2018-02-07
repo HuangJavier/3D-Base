@@ -6,3 +6,14 @@
 /.vs
 /Debug
 /SnowScene/Release/*.log
+/Release
+/SnowScene/Release
+/SnowScene/FX/LightHelper.fxo
+/SnowScene/FX/Rain.cod
+/SnowScene/FX/Snow.cod
+/SnowScene/FX/Snow.fxo
+/SnowScene/FX/Terrain.cod
+/SnowScene/FX/Terrain.fxo
+/SnowScene/FX/Fire.cod
+/SnowScene/FX/Fire.fxo
+/SnowScene/FX/LightHelper.cod

@@ -1,8 +1,0 @@
-﻿  SnowSceneDemo.cpp
-Effects11d.lib(d3dxGlobal.obj) : warning LNK4099: 未找到 PDB“Effects11.pdb”(使用“Effects11d.lib(d3dxGlobal.obj)”或在“C:\Users\27583\Desktop\SnowScene\Debug\Effects11.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Effects11d.lib(EffectAPI.obj) : warning LNK4099: 未找到 PDB“Effects11.pdb”(使用“Effects11d.lib(EffectAPI.obj)”或在“C:\Users\27583\Desktop\SnowScene\Debug\Effects11.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Effects11d.lib(EffectLoad.obj) : warning LNK4099: 未找到 PDB“Effects11.pdb”(使用“Effects11d.lib(EffectLoad.obj)”或在“C:\Users\27583\Desktop\SnowScene\Debug\Effects11.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Effects11d.lib(EffectNonRuntime.obj) : warning LNK4099: 未找到 PDB“Effects11.pdb”(使用“Effects11d.lib(EffectNonRuntime.obj)”或在“C:\Users\27583\Desktop\SnowScene\Debug\Effects11.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Effects11d.lib(EffectReflection.obj) : warning LNK4099: 未找到 PDB“Effects11.pdb”(使用“Effects11d.lib(EffectReflection.obj)”或在“C:\Users\27583\Desktop\SnowScene\Debug\Effects11.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-Effects11d.lib(EffectRuntime.obj) : warning LNK4099: 未找到 PDB“Effects11.pdb”(使用“Effects11d.lib(EffectRuntime.obj)”或在“C:\Users\27583\Desktop\SnowScene\Debug\Effects11.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-  SnowScene.vcxproj -> C:\Users\27583\Desktop\SnowScene\Debug\SnowScene.exe
