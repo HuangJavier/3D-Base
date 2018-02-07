@@ -1,34 +1,31 @@
 //***************************************************************************************
-// Sky.cpp by Frank Luna (C) 2011 All Rights Reserved.
+// Sky.cpp 
 //***************************************************************************************
 
 #include "Sky.h"
 #include "GeometryGenerator.h"
 #include "Camera.h"
 #include "Vertex.h"
-#include "Effects.h"
+#include "Effect.h"
 
 Sky::Sky(ID3D11Device* device, const std::wstring& cubemapFilename, float skySphereRadius)
 {
-	ID3D11Resource* texResource = nullptr;
+	// Load texture from file.
+	HR(DirectX::CreateDDSTextureFromFile(device, cubemapFilename.c_str(), nullptr, &mCubeMapSRV));
 
-	HR(DirectX::CreateDDSTextureFromFile(device,
-		cubemapFilename.c_str(), &texResource, &mCubeMapSRV));
-	ReleaseCOM(texResource); // view saves reference
-
-	//HR(D3DX11CreateShaderResourceViewFromFile(device, cubemapFilename.c_str(), 0, 0, &mCubeMapSRV, 0));
-
+	// Draw a sphere for sky box.
 	GeometryGenerator::MeshData sphere;
 	GeometryGenerator geoGen;
 	geoGen.CreateSphere(skySphereRadius, 30, 30, sphere);
 
+	// Store vertices of the sphere.
 	std::vector<XMFLOAT3> vertices(sphere.Vertices.size());
-
 	for(size_t i = 0; i < sphere.Vertices.size(); ++i)
 	{
 		vertices[i] = sphere.Vertices[i].Position;
 	}
 
+	// Create vertex buffer.
     D3D11_BUFFER_DESC vbd;
     vbd.Usage = D3D11_USAGE_IMMUTABLE;
 	vbd.ByteWidth = sizeof(XMFLOAT3) * vertices.size();
@@ -43,6 +40,7 @@ Sky::Sky(ID3D11Device* device, const std::wstring& cubemapFilename, float skySph
     HR(device->CreateBuffer(&vbd, &vinitData, &mVB));
 	
 
+	// Create index buffer.
 	mIndexCount = sphere.Indices.size();
 
 	D3D11_BUFFER_DESC ibd;
@@ -76,17 +74,16 @@ ID3D11ShaderResourceView* Sky::CubeMapSRV()
 
 void Sky::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 {
-	// center Sky about eye in world space
+	// Center Sky about eye in world space
 	XMFLOAT3 eyePos = camera.GetPosition();
 	XMMATRIX T = XMMatrixTranslation(eyePos.x, eyePos.y, eyePos.z);
-
 
 	XMMATRIX WVP = XMMatrixMultiply(T, camera.ViewProj());
 
 	Effects::SkyFX->SetWorldViewProj(WVP);
 	Effects::SkyFX->SetCubeMap(mCubeMapSRV);
 
-
+	// Setting vertex buffers and index buffers.
 	UINT stride = sizeof(XMFLOAT3);
     UINT offset = 0;
     dc->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
@@ -97,12 +94,11 @@ void Sky::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 	D3DX11_TECHNIQUE_DESC techDesc;
     Effects::SkyFX->SkyTech->GetDesc( &techDesc );
 
+	// Render the sky box.
     for(UINT p = 0; p < techDesc.Passes; ++p)
     {
         ID3DX11EffectPass* pass = Effects::SkyFX->SkyTech->GetPassByIndex(p);
-
 		pass->Apply(0, dc);
-
 		dc->DrawIndexed(mIndexCount, 0, 0);
 	}
 }

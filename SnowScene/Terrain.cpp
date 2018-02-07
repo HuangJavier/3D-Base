@@ -1,11 +1,11 @@
 //***************************************************************************************
-// Terrain.cpp by Frank Luna (C) 2011 All Rights Reserved.
+// Terrain.cpp 
 //***************************************************************************************
 
 #include "Terrain.h"
 #include "Camera.h"
 #include "LightHelper.h"
-#include "Effects.h"
+#include "Effect.h"
 #include "Vertex.h"
 #include <fstream>
 #include <sstream>

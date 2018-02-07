@@ -20,22 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Textures\black.dds" />
-    <Image Include="..\Textures\box.dds" />
-    <Image Include="..\Textures\bricks.dds" />
-    <Image Include="..\Textures\desertcube1024.dds" />
-    <Image Include="..\Textures\floor.dds" />
-    <Image Include="..\Textures\grasscube1024.dds" />
     <Image Include="..\Textures\red.dds" />
     <Image Include="..\Textures\snow.dds" />
     <Image Include="..\Textures\snowcube1024.dds" />
-    <Image Include="..\Textures\snowfloor.dds" />
-    <Image Include="..\Textures\snowman.dds" />
-    <Image Include="..\Textures\stone.dds" />
-    <Image Include="..\Textures\sunsetcube1024.dds" />
     <Image Include="Textures\blend.dds" />
-    <Image Include="Textures\layer.dds" />
+    <Image Include="Textures\box.dds" />
+    <Image Include="Textures\hand.dds" />
+    <Image Include="Textures\layersnow.dds" />
     <Image Include="Textures\raindrop.dds" />
-    <Image Include="Textures\snow1.dds" />
     <Image Include="Textures\terrain.dds" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +64,7 @@
     <ClCompile Include="Common\Waves.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Effects.cpp">
+    <ClCompile Include="Effect.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
@@ -110,7 +102,7 @@
     <ClInclude Include="Common\MathHelper.h" />
     <ClInclude Include="Common\TextureMgr.h" />
     <ClInclude Include="Common\Waves.h" />
-    <ClInclude Include="Effects.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="RenderStates.h" />
     <ClInclude Include="Sky.h" />
@@ -123,16 +115,22 @@
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
     </CustomBuild>
     <CustomBuild Include="FX\LightHelper.fx">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
     </CustomBuild>
     <CustomBuild Include="FX\Sky.fx">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -140,16 +138,15 @@
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="FX\Rain.fx">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
     </CustomBuild>
     <CustomBuild Include="FX\Snow.fx">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +154,17 @@
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fxc /Fc /Od /Zi /T fx_5_0 /Fo "%(RelativeDir)\%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)\%(Filename).fxo</Outputs>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectXTK-master\DirectXTK_Desktop_2017_Win10.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\terrain.raw" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -195,6 +202,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\MeshContentTask.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -213,12 +221,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\DirectXTK-master\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\DirectXTK-master\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -256,7 +266,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -295,5 +305,6 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\MeshContentTask.targets" />
   </ImportGroup>
 </Project>

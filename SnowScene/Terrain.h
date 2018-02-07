@@ -1,7 +1,7 @@
 //***************************************************************************************
-// Terrain.h by Frank Luna (C) 2011 All Rights Reserved.
+// Terrain.h
 //   
-// Class that renders a terrain using hardware tessellation and multitexturing.
+// Simple class for rendering the terrain.
 //***************************************************************************************
 
 #ifndef TERRAIN_H

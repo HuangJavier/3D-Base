@@ -1,7 +1,7 @@
 //***************************************************************************************
-// Snowman.h by Huangjw 2017 All Rights Reserved.
-//   
-// Simple class that renders a snowman.
+// Snowman.h
+// 
+// Simple class for rendering a snowman.
 //***************************************************************************************
 
 #ifndef SNOWMAN_H
@@ -18,7 +18,7 @@ public:
 	~Snowman();
 
 	void Init();
-	void UpdateScene(XMMATRIX base);
+	void UpdatePosition(XMMATRIX base);
 	void Draw(ID3D11DeviceContext* dc, const Camera& camera);
 
 private:

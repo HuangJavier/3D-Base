@@ -1,5 +1,5 @@
 #include "Vertex.h"
-#include "Effects.h"
+#include "Effect.h"
 
 #pragma region InputLayoutDesc
 

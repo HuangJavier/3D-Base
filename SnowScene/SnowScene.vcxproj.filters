@@ -27,21 +27,6 @@
     <Image Include="..\Textures\black.dds">
       <Filter>Textures</Filter>
     </Image>
-    <Image Include="..\Textures\box.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="..\Textures\bricks.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="..\Textures\desertcube1024.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="..\Textures\floor.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="..\Textures\grasscube1024.dds">
-      <Filter>Textures</Filter>
-    </Image>
     <Image Include="..\Textures\red.dds">
       <Filter>Textures</Filter>
     </Image>
@@ -51,31 +36,22 @@
     <Image Include="..\Textures\snowcube1024.dds">
       <Filter>Textures</Filter>
     </Image>
-    <Image Include="..\Textures\snowfloor.dds">
+    <Image Include="Textures\raindrop.dds">
       <Filter>Textures</Filter>
     </Image>
-    <Image Include="..\Textures\snowman.dds">
+    <Image Include="Textures\terrain.dds">
       <Filter>Textures</Filter>
     </Image>
-    <Image Include="..\Textures\stone.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="..\Textures\sunsetcube1024.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="Textures\snow1.dds">
+    <Image Include="Textures\box.dds">
       <Filter>Textures</Filter>
     </Image>
     <Image Include="Textures\blend.dds">
       <Filter>Textures</Filter>
     </Image>
-    <Image Include="Textures\layer.dds">
+    <Image Include="Textures\layersnow.dds">
       <Filter>Textures</Filter>
     </Image>
-    <Image Include="Textures\raindrop.dds">
-      <Filter>Textures</Filter>
-    </Image>
-    <Image Include="Textures\terrain.dds">
+    <Image Include="Textures\hand.dds">
       <Filter>Textures</Filter>
     </Image>
   </ItemGroup>
@@ -113,9 +89,6 @@
     <ClCompile Include="Common\Waves.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Effects.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="RenderStates.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -135,6 +108,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -175,9 +151,6 @@
     <ClInclude Include="Common\Waves.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Effects.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="RenderStates.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -196,6 +169,9 @@
     <ClInclude Include="Terrain.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FX\Basic.fx">
@@ -210,14 +186,16 @@
     <CustomBuild Include="FX\Fire.fx">
       <Filter>FX</Filter>
     </CustomBuild>
-    <CustomBuild Include="FX\Rain.fx">
-      <Filter>FX</Filter>
-    </CustomBuild>
     <CustomBuild Include="FX\Snow.fx">
       <Filter>FX</Filter>
     </CustomBuild>
     <CustomBuild Include="FX\Terrain.fx">
       <Filter>FX</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\terrain.raw">
+      <Filter>Textures</Filter>
+    </None>
   </ItemGroup>
 </Project>

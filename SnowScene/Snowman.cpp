@@ -1,16 +1,17 @@
 //***************************************************************************************
-// Snowman.cpp by huangjw 2017 All Rights Reserved.
+// Snowman.cpp
 //***************************************************************************************
 
 #include "Snowman.h"
 #include "GeometryGenerator.h"
 #include "Camera.h"
 #include "Vertex.h"
-#include "Effects.h"
+#include "Effect.h"
 
 Snowman::Snowman(ID3D11Device* device, FLOAT snowmanScale)
 {
 	md3dDevice = device;
+	// Initial scale of every part in snowman modle.
 	mBodyScale = snowmanScale * 3.0f / 4.0f;
 	mHeadScale = snowmanScale / 2.0f;
 	mHatEdgeRadius = snowmanScale / 4.0f;
@@ -32,6 +33,7 @@ Snowman::Snowman(ID3D11Device* device, FLOAT snowmanScale)
 
 void Snowman::Init()
 {
+	// Initial lights of every part.
 	mBodySphereMat.Ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	mBodySphereMat.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	mBodySphereMat.Specular = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.0f);
@@ -72,23 +74,18 @@ void Snowman::Init()
 	mMouthBoxMat.Specular = XMFLOAT4(0.8f, 0.8f, 0.8f, 16.0f);
 	mMouthBoxMat.Reflect = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
 
-	ID3D11Resource* texResource = nullptr;
+	// Create texture from files.
+	HR(DirectX::CreateDDSTextureFromFile(md3dDevice,
+		L"Textures/snow.dds", nullptr, &mSnowmanTexSRV));
 
 	HR(DirectX::CreateDDSTextureFromFile(md3dDevice,
-		L"Textures/snow.dds", &texResource, &mSnowmanTexSRV));
-	ReleaseCOM(texResource); // view saves reference
+		L"Textures/black.dds", nullptr, &mBlackTexSRV));
 
 	HR(DirectX::CreateDDSTextureFromFile(md3dDevice,
-		L"Textures/black.dds", &texResource, &mBlackTexSRV));
-	ReleaseCOM(texResource); // view saves reference
+		L"Textures/red.dds", nullptr, &mRedTexSRV));
 
 	HR(DirectX::CreateDDSTextureFromFile(md3dDevice,
-		L"Textures/red.dds", &texResource, &mRedTexSRV));
-	ReleaseCOM(texResource); // view saves reference
-
-	HR(DirectX::CreateDDSTextureFromFile(md3dDevice,
-		L"Textures/hand.dds", &texResource, &mHandTexSRV));
-	ReleaseCOM(texResource); // view saves reference
+		L"Textures/hand.dds", nullptr, &mHandTexSRV));
 }
 
 
@@ -271,7 +268,7 @@ void Snowman::BuildSnowmanBuffers()
 }
 
 
-void Snowman::UpdateScene(XMMATRIX base)
+void Snowman::UpdatePosition(XMMATRIX base)
 {
 	XMStoreFloat4x4(&mBodySphereWorld, XMMatrixTranslation(0.0f, mBodyScale / 2, 0.0f) * base);
 
@@ -325,14 +322,14 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 	dc->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 	dc->IASetIndexBuffer(mIB, DXGI_FORMAT_R32_UINT, 0);
 
-	// Draw the snowman
+	// Draw a snowman
 	activeTexTech->GetDesc(&techDesc);
 	for (UINT p = 0; p < techDesc.Passes; ++p)
 	{
 		// Draw the bodySpheres.
 		world = XMLoadFloat4x4(&mBodySphereWorld);
 		worldInvTranspose = MathHelper::InverseTranspose(world);
-		worldViewProj = world * view*proj;
+		worldViewProj = world * view * proj;
 
 		Effects::BasicFX->SetWorld(world);
 		Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);
@@ -362,7 +359,7 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 		// Draw the hatEdgeCylinders.
 		world = XMLoadFloat4x4(&mHatEdgeCylinderWorld);
 		worldInvTranspose = MathHelper::InverseTranspose(world);
-		worldViewProj = world * view*proj;
+		worldViewProj = world * view * proj;
 
 		Effects::BasicFX->SetWorld(world);
 		Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);
@@ -377,7 +374,7 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 		// Draw the hatCylinders.
 		world = XMLoadFloat4x4(&mHatCylinderWorld);
 		worldInvTranspose = MathHelper::InverseTranspose(world);
-		worldViewProj = world * view*proj;
+		worldViewProj = world * view * proj;
 
 		Effects::BasicFX->SetWorld(world);
 		Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);
@@ -394,7 +391,7 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 		{
 			world = XMLoadFloat4x4(&mEyeSphereWorld[i]);
 			worldInvTranspose = MathHelper::InverseTranspose(world);
-			worldViewProj = world * view*proj;
+			worldViewProj = world * view * proj;
 
 			Effects::BasicFX->SetWorld(world);
 			Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);
@@ -410,7 +407,7 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 		// Draw the noseCylinders.
 		world = XMLoadFloat4x4(&mNoseCylinderWorld);
 		worldInvTranspose = MathHelper::InverseTranspose(world);
-		worldViewProj = world * view*proj;
+		worldViewProj = world * view * proj;
 
 		Effects::BasicFX->SetWorld(world);
 		Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);
@@ -425,7 +422,7 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 		// Draw the handCylinders.
 		world = XMLoadFloat4x4(&mHandCylinderWorld);
 		worldInvTranspose = MathHelper::InverseTranspose(world);
-		worldViewProj = world * view*proj;
+		worldViewProj = world * view * proj;
 
 		Effects::BasicFX->SetWorld(world);
 		Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);
@@ -440,7 +437,7 @@ void Snowman::Draw(ID3D11DeviceContext* dc, const Camera& camera)
 		// Draw the mouthBox.
 		world = XMLoadFloat4x4(&mMouthBoxWorld);
 		worldInvTranspose = MathHelper::InverseTranspose(world);
-		worldViewProj = world * view*proj;
+		worldViewProj = world * view * proj;
 
 		Effects::BasicFX->SetWorld(world);
 		Effects::BasicFX->SetWorldInvTranspose(worldInvTranspose);

@@ -1,7 +1,7 @@
 //***************************************************************************************
-// Sky.h by Frank Luna (C) 2011 All Rights Reserved.
-//   
-// Simple class that renders a sky using a cube map.
+// Sky.h 
+//
+// Simple class for creating a sky box
 //***************************************************************************************
 
 #ifndef SKY_H

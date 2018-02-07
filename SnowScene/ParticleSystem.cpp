@@ -5,7 +5,7 @@
 #include "ParticleSystem.h"
 #include "TextureMgr.h"
 #include "Vertex.h"
-#include "Effects.h"
+#include "Effect.h"
 #include "Camera.h"
  
 ParticleSystem::ParticleSystem()
